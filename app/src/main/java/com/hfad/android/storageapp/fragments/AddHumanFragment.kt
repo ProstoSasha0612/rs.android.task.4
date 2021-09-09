@@ -72,7 +72,6 @@ class AddHumanFragment : Fragment() {
 //            gender = if(binding.rbMale.isChecked) MALE_GENDER else FEMALE_GENDER
 //
 //        }
-        val id = viewModel.lastId++
         val name = binding.edittextName.text.toString()
         val surname = binding.editTextSurname.text.toString()
         val age = binding.editTextAge.text.toString()

@@ -7,6 +7,4 @@ class AddHumanViewModel : ViewModel() {
     var surname:String? = null
     var age:Int? = null
     var gender:String? = null
-
-    var lastId = 0
 }
