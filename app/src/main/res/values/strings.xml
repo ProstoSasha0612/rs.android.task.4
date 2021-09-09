@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">StorageApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_name">Name: </string>
+    <string name="default_surname">Surname: </string>
+    <string name="default_age">Age: </string>
+    <string name="default_gender">Gender: </string>
+    <string name="radiobtn_text_male">Male</string>
+    <string name="radiobtn_text_female">Female</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_age">Age</string>
+    <string name="text_add">Add</string>
+    <string name="settings_text">settings</string>
+    <string name="room_settings_key">room using</string>
+    <string name="alphabet_filter_settings_key">alphabet filter</string>
 </resources>

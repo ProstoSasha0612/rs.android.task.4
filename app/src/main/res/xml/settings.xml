@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorAccent"
+    android:backgroundTint="@color/colorAccent">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/room_icon"
+        android:key="@string/room_settings_key"
+        android:summary="Enabled - room implementation, disabled - SQLite cursor's "
+        android:title="Room" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:icon="@drawable/alphabet_order_icon"
+        android:key="@string/alphabet_filter_settings_key"
+        android:summary="Show peoples in alphabet order by first name"
+        android:title="Alphabet order" />
+
+</PreferenceScreen>
