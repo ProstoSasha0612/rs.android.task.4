@@ -26,5 +26,4 @@ interface HumansDao{
 
     @Query("SELECT * FROM peoples ORDER BY name")
     fun getInAlphabetOrder():LiveData<List<Human>>
-//    fun getInAlphabetOrder():List<Human>
 }

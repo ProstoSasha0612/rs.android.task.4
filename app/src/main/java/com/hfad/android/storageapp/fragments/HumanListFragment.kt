@@ -51,17 +51,13 @@ class HumanListFragment : Fragment() {
         //Checking settings from preferences
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         if (prefs.getBoolean(getString(R.string.alphabet_filter_settings_key), false)) {
-//            viewModel.getInAlphabetOrder()
+            viewModel.getInAlphabetOrder()
 //            val list = viewModel.humansLiveData.value?.size?:0
-            val list = viewModel.getInAlphabetOrder()
+            val list = viewModel.getInAlphabetOrder().value?: emptyList()
             val a = 3
             binding.fab.setOnClickListener{
 
             }
-//            updateFullList(list?: emptyList())
-//            val list = viewModel.getInAlphabetOrder()
-//            val list1 = viewModel.humansLiveData.value?: emptyList()
-//            updateFullList(list1)
         }
 
 
@@ -80,7 +76,7 @@ class HumanListFragment : Fragment() {
 
     private fun updateFullList(peoples: List<Human>) { //TODO add fun's that not submit All list, only one item(ec. when adding new Human)
         humanAdapter.submitList(peoples)
-        humanAdapter.notifyDataSetChanged()
+//        humanAdapter.notifyDataSetChanged()
 //        val adapter = HumanAdapter()
 //        binding.humanList.adapter = adapter
 

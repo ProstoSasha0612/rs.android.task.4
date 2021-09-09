@@ -32,7 +32,7 @@ class Repository(private val db:HumanDatabase) {
             return Room.databaseBuilder(
                 context,
                 HumanDatabase::class.java,
-                "peoples-database"
+                DATABASE_NAME
             ).build()
         }
 
@@ -46,5 +46,8 @@ class Repository(private val db:HumanDatabase) {
             return INSTANCE?:
             throw IllegalAccessException()
         }
+
+        const val DATABASE_NAME = "peoples-database"
     }
+
 }
