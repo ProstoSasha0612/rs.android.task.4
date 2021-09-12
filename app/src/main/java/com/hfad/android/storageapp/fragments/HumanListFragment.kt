@@ -1,15 +1,13 @@
 package com.hfad.android.storageapp.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.android.storageapp.HumanAdapter
@@ -42,6 +40,7 @@ class HumanListFragment : Fragment() {
             adapter = humanAdapter
         }
         (activity as? AppCompatActivity)?.supportActionBar?.title = "StorageApp"
+        
 
 
         viewModel.humansLiveData.observe(viewLifecycleOwner) {
@@ -51,13 +50,10 @@ class HumanListFragment : Fragment() {
         //Checking settings from preferences
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         if (prefs.getBoolean(getString(R.string.alphabet_filter_settings_key), false)) {
-            viewModel.getInAlphabetOrder().observe(viewLifecycleOwner){
+            viewModel.getInAlphabetOrder().observe(viewLifecycleOwner) {
                 updateFullList(it)
             }
         }
-
-
-
 
         binding.fab.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -66,6 +62,7 @@ class HumanListFragment : Fragment() {
                 .commit()
         }
 
+        viewModel.itemTouchHelper.attachToRecyclerView(binding.humanList)
 
     }
 

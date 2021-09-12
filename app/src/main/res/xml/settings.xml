@@ -11,10 +11,17 @@
         android:title="Room" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:icon="@drawable/alphabet_order_icon"
         android:key="@string/alphabet_filter_settings_key"
         android:summary="Show peoples in alphabet order by first name"
         android:title="Alphabet order" />
+
+    <Preference
+        android:defaultValue="true"
+        android:icon="@drawable/alphabet_order_icon"
+        android:key="@string/alphabet_filter_settings_key"
+        android:summary="Show peoples in alphabet order by first name"
+        android:title="Alphabet order"/>
 
 </PreferenceScreen>

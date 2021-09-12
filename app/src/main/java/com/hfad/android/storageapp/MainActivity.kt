@@ -20,6 +20,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+
+        binding.toolbar.setNavigationOnClickListener {
+            if(supportFragmentManager.backStackEntryCount > 0){
+                binding.toolbar.setNavigationIcon(null)
+            }
+            onBackPressed()
+        }
 
 
         if (savedInstanceState == null) {
@@ -30,17 +39,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.toolbar_btn_settings){
+        if (item.itemId == R.id.toolbar_btn_settings) {
+            supportFragmentManager.popBackStack()
             supportFragmentManager.beginTransaction()
                 .addToBackStack("Settings fragment")
-                .replace(R.id.container,SettingsFragment())
+                .replace(R.id.container, SettingsFragment())
                 .commit()
         }
         return true
     }
+
 }

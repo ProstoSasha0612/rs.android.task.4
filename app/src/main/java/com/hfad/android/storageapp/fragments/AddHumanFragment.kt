@@ -39,39 +39,17 @@ class AddHumanFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true) //TODO add navigation
 
         binding.btnAdd.setOnClickListener {
-
-
-            if(addToList()){
+            if (addToList()) {
                 parentFragmentManager.popBackStack()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, HumanListFragment())
                     .commit()
             }
         }
-
-//        if(savedInstanceState !=null){ TODO разобраться почему оно все равно сохраняется
-//            with(binding){
-//                edittextName.setText(viewModel.name)
-////                editTextSurname.setText(viewModel.surname)
-//                editTextAge.setText(viewModel.age.toString())
-//                if(viewModel.gender == MALE_GENDER){
-//                    rbMale.isChecked = true
-//                } else {
-//                    rbFemale.isChecked = true
-//                }
-//            }
-//
-//        }
     }
 
-    private fun addToList():Boolean {
-//        with(viewModel){TODO разобраться почему оно все равно сохраняется PART2
-//            name = binding.edittextName.text.toString()
-//            surname = binding.editTextSurname.text.toString()
-//            age = binding.editTextAge.text.toString().toInt()
-//            gender = if(binding.rbMale.isChecked) MALE_GENDER else FEMALE_GENDER
-//
-//        }
+    //TODO add when returns back    notify item inserted
+    private fun addToList(): Boolean {
         val name = binding.edittextName.text.toString()
         val surname = binding.editTextSurname.text.toString()
         val age = binding.editTextAge.text.toString()
