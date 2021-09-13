@@ -1,7 +1,6 @@
 package com.hfad.android.storageapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +39,7 @@ class HumanListFragment : Fragment() {
             adapter = humanAdapter
         }
         (activity as? AppCompatActivity)?.supportActionBar?.title = "StorageApp"
-        
+
 
 
         viewModel.humansLiveData.observe(viewLifecycleOwner) {
@@ -63,6 +62,7 @@ class HumanListFragment : Fragment() {
         }
 
         viewModel.itemTouchHelper.attachToRecyclerView(binding.humanList)
+
 
     }
 

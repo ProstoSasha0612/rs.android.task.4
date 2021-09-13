@@ -15,4 +15,5 @@
     <string name="settings_text">settings</string>
     <string name="room_settings_key">room using</string>
     <string name="alphabet_filter_settings_key">alphabet filter</string>
+    <string name="save_btn_text">Save</string>
 </resources>

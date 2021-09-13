@@ -70,7 +70,5 @@ dependencies {
     /*Shared Preferences*/
     implementation "androidx.preference:preference:1.1.1"
 
-    /*Swipe Reveal Layout*/
-    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
 }
