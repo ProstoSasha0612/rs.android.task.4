@@ -73,7 +73,7 @@ class HumanListFragment : Fragment() {
 
     }
 
-//    private fun updateOneItem(){ TODO make it later
-//        humanAdapter.notifyItemChanged()
+//    private fun updateOneItem(human: Human){ //TODO make it later
+//
 //    }
 }

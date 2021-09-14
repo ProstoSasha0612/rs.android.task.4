@@ -39,7 +39,7 @@ class HumanAdapter :
             binding.root.setOnLongClickListener(this)
         }
 
-        private lateinit var human:Human
+        lateinit var human:Human
 
         fun bind(human: Human) {
             this.human = human
