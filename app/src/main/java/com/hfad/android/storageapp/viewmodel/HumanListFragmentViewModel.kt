@@ -30,7 +30,10 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
     private val swipeBackgroundUpdate: ColorDrawable =
         ColorDrawable(Color.parseColor("#FFA500")) //orange
     private val deleteIcon: Drawable =
-        ContextCompat.getDrawable(application.applicationContext, R.drawable.ic_delete)!! //TODO delete !!
+        ContextCompat.getDrawable(
+            application.applicationContext,
+            R.drawable.ic_delete
+        )!! //TODO delete !!
     private val editIcon: Drawable =
         ContextCompat.getDrawable(application.applicationContext, R.drawable.ic_edit)!!
 
@@ -63,17 +66,14 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-//                var startPosition = viewHolder.adapterPosition
-//                var endPosition = target.adapterPosition
-//
-//                recyclerView.adapter?.notifyItemMoved(startPosition, endPosition)
                 return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                if(direction == ItemTouchHelper.LEFT){
+                if (direction == ItemTouchHelper.LEFT) {
                     val humanToDelete = (viewHolder as HumanAdapter.HumanViewHolder).human
                     delete(humanToDelete)
+
 
                 } else {
 
@@ -107,8 +107,8 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
                         itemView.left + iconMargin + editIcon.intrinsicWidth,
                         itemView.bottom - iconMargin
                     )
-//                    swipeBackgroundUpdate.draw(c)
-//                    editIcon?.draw(c)
+                    swipeBackgroundUpdate.draw(c)
+                    editIcon?.draw(c)
                 } else {        //swipe left
                     swipeBackgroundDelete.setBounds(
                         itemView.right + dX.toInt(),
@@ -122,8 +122,7 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
                         itemView.right - iconMargin + deleteIcon.intrinsicWidth,
                         itemView.bottom - iconMargin
                     )
-                    swipeBackgroundDelete.draw(c)
-                    deleteIcon.draw(c)
+
 
                 }
 
@@ -141,10 +140,6 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
                     isCurrentlyActive
                 )
             }
-
-//            override fun convertToAbsoluteDirection(flags: Int, layoutDirection: Int): Int {
-//
-//            }
         })
 
     companion object {
