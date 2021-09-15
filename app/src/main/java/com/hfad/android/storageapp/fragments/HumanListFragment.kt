@@ -20,7 +20,8 @@ import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 
 class HumanListFragment : Fragment(), SwipeCallbacks {
 
-    private lateinit var binding: FragmentHumanListBinding
+    private var _binding: FragmentHumanListBinding? = null
+    private val binding = requireNotNull(_binding)
     private val humanAdapter = HumanAdapter()
     private val viewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
@@ -31,7 +32,7 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHumanListBinding.inflate(inflater)
+        _binding = FragmentHumanListBinding.inflate(inflater)
         return binding.root
     }
 
@@ -48,7 +49,6 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
             updateFullList(it)
         }
 
-
         //Checking settings from preferences
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         if (prefs.getBoolean(getString(R.string.alphabet_filter_settings_key), false)) {
@@ -64,10 +64,12 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
                 .commit()
         }
 
-
         itemTouchHelper.touchHelper.attachToRecyclerView(binding.humanList)
+    }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     //Swipable Callbacks
@@ -75,10 +77,19 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
         viewModel.delete(human)
     }
 
-    override fun rightSwipe() {
+    override fun rightSwipe(human: Human) {
         parentFragmentManager.beginTransaction()
             .addToBackStack("Add Human Fragment")
-            .replace(R.id.container, UpdateHumanFragment())
+            .replace(
+                R.id.container,
+                UpdateHumanFragment.newInstance(
+                    human.id,
+                    human.name,
+                    human.secondName,
+                    human.age,
+                    human.gender
+                )
+            )
             .commit()
     }
 

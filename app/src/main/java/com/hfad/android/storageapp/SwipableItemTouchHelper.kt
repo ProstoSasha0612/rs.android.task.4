@@ -3,11 +3,8 @@ package com.hfad.android.storageapp
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import java.nio.file.Files.delete
 
 class SwipableItemTouchHelper(val swipeCallbacks: SwipeCallbacks) {
     private val swipeBackgroundDelete: ColorDrawable =
@@ -28,14 +25,12 @@ class SwipableItemTouchHelper(val swipeCallbacks: SwipeCallbacks) {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val human = (viewHolder as HumanAdapter.HumanViewHolder).human
                 if (direction == ItemTouchHelper.LEFT) {
-                    val humanToDelete = (viewHolder as HumanAdapter.HumanViewHolder).human
-                    swipeCallbacks.leftSwipe(humanToDelete)
+                    swipeCallbacks.leftSwipe(human)
                 } else {
-                    swipeCallbacks.rightSwipe()
+                    swipeCallbacks.rightSwipe(human)
                 }
-
-
             }
 
             override fun onChildDraw(
@@ -80,7 +75,6 @@ class SwipableItemTouchHelper(val swipeCallbacks: SwipeCallbacks) {
 //                )
                     swipeBackgroundDelete.draw(c)
                 }
-
 
                 super.onChildDraw(
                     c,

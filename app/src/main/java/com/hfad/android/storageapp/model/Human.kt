@@ -1,7 +1,7 @@
 package com.hfad.android.storageapp.model
 
-import androidx.room.*
-import java.util.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "peoples")
 data class Human(

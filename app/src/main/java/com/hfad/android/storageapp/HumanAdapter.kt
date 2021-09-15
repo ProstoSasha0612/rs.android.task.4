@@ -16,10 +16,6 @@ class HumanAdapter :
         itemComparator
     ) {
 
-    interface Callbacks{
-        fun onHumanSelectedUpdate()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HumanViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = HumanItemBinding.inflate(layoutInflater)
@@ -33,13 +29,13 @@ class HumanAdapter :
 
 
     class HumanViewHolder(private val binding: HumanItemBinding) :
-        RecyclerView.ViewHolder(binding.root), View.OnLongClickListener{
+        RecyclerView.ViewHolder(binding.root), View.OnLongClickListener {
 
         init {
             binding.root.setOnLongClickListener(this)
         }
 
-        lateinit var human:Human
+        lateinit var human: Human
 
         fun bind(human: Human) {
             this.human = human
@@ -50,8 +46,7 @@ class HumanAdapter :
         }
 
         override fun onLongClick(v: View?): Boolean {
-            Snackbar.make(v?:binding.root,"Hello",Snackbar.LENGTH_SHORT).show()
-
+            Snackbar.make(v ?: binding.root, "Hello", Snackbar.LENGTH_SHORT).show()
             return true
         }
     }

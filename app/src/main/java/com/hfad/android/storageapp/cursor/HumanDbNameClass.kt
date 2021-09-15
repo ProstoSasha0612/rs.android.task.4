@@ -1,7 +1,5 @@
 package com.hfad.android.storageapp.cursor
 
-import android.provider.BaseColumns
-
 object HumanDbNameClass {
     const val TABLE_NAME = "peoples_database"
     const val COLUMN_ID = "id"

@@ -11,22 +11,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.hfad.android.storageapp.R
 import com.hfad.android.storageapp.databinding.AddHumanFragmentBinding
 import com.hfad.android.storageapp.model.Human
-import com.hfad.android.storageapp.viewmodel.AddHumanViewModel
 import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 
 class AddHumanFragment : Fragment() {
 
-    private lateinit var binding: AddHumanFragmentBinding
+    private var _binding: AddHumanFragmentBinding? = null
+    private val binding = requireNotNull(_binding)
     private val listViewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = AddHumanFragmentBinding.inflate(layoutInflater)
+        _binding = AddHumanFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -61,9 +60,12 @@ class AddHumanFragment : Fragment() {
                 .show()
             return false
         }
-
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
     companion object {
         const val MALE_GENDER = "Male"

@@ -1,9 +1,9 @@
 package com.hfad.android.storageapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.hfad.android.storageapp.databinding.ActivityMainBinding
 import com.hfad.android.storageapp.fragments.HumanListFragment
 import com.hfad.android.storageapp.fragments.SettingsFragment
@@ -22,14 +22,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-
         binding.toolbar.setNavigationOnClickListener {
-            if(supportFragmentManager.backStackEntryCount > 0){
+            if (supportFragmentManager.backStackEntryCount > 0) {
                 binding.toolbar.setNavigationIcon(null)
             }
             onBackPressed()
         }
-
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

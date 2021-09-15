@@ -14,11 +14,12 @@ import com.hfad.android.storageapp.databinding.FragmentUpdateHumanBinding
 import com.hfad.android.storageapp.model.Human
 import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 
-
 class UpdateHumanFragment : Fragment() {
 
-    private lateinit var binding: FragmentUpdateHumanBinding
-    private var human: Human? = null
+    private var _binding: FragmentUpdateHumanBinding? = null
+    private val binding = requireNotNull(_binding)
+    private var id: Int? = null
+
     private val listViewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }
@@ -27,7 +28,7 @@ class UpdateHumanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUpdateHumanBinding.inflate(layoutInflater)
+        _binding = FragmentUpdateHumanBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -36,7 +37,20 @@ class UpdateHumanFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Update person"
         //TODO add navigation
 
-        human = arguments?.get(HUMAN_KEY) as? Human
+        id = arguments?.getInt(HUMAN_KEY_ID)
+        val name = arguments?.getString(HUMAN_KEY_NAME)
+        val surname = arguments?.getString(HUMAN_KEY_SURNAME)
+        val age = arguments?.getInt(HUMAN_KEY_AGE)
+        val gender = arguments?.getString(HUMAN_KEY_GENDER)
+
+        binding.edittextName.setText(name)
+        binding.editTextSurname.setText(surname)
+        binding.editTextAge.setText(age.toString())
+        if (gender == AddHumanFragment.MALE_GENDER) {
+            binding.rbMale.isChecked = true
+        } else {
+            binding.rbFemale.isChecked = true
+        }
 
         binding.btnAdd.setOnClickListener {
             if (updateHuman()) {
@@ -44,11 +58,16 @@ class UpdateHumanFragment : Fragment() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, HumanListFragment())
                     .commit()
-            } else{
+            } else {
                 Snackbar.make(binding.root, "Please, fill in all the fields", Snackbar.LENGTH_LONG)
                     .show()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun updateHuman(): Boolean {
@@ -62,7 +81,7 @@ class UpdateHumanFragment : Fragment() {
         if (name.isNotEmpty() && surname.isNotEmpty() &&
             age.isNotEmpty() && gender.isNotEmpty()
         ) {
-            val updatedHuman = Human(human?.id ?: 0, name, surname, age.toInt(), gender)
+            val updatedHuman = Human(id ?: 0, name, surname, age.toInt(), gender)
             listViewModel.update(updatedHuman)
             return true
         } else {
@@ -73,14 +92,30 @@ class UpdateHumanFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(human: Human): UpdateHumanFragment {
-            val args = bundleOf(HUMAN_KEY to human)
+        fun newInstance(
+            id: Int,
+            name: String,
+            secondName: String,
+            age: Int,
+            gender: String
+        ): UpdateHumanFragment {
+            val args = bundleOf(
+                HUMAN_KEY_ID to id,
+                HUMAN_KEY_NAME to name,
+                HUMAN_KEY_SURNAME to secondName,
+                HUMAN_KEY_AGE to age,
+                HUMAN_KEY_GENDER to gender
+            )
 
             val fragment = UpdateHumanFragment()
             fragment.arguments = args
             return fragment
         }
 
-        const val HUMAN_KEY = "human-key"
+        const val HUMAN_KEY_NAME = "human_key_name"
+        const val HUMAN_KEY_SURNAME = "human_key_surname"
+        const val HUMAN_KEY_AGE = "human_key_age"
+        const val HUMAN_KEY_GENDER = "human_key_gender"
+        const val HUMAN_KEY_ID = "human_key_id"
     }
 }

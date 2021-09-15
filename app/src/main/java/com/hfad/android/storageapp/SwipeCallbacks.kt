@@ -2,7 +2,7 @@ package com.hfad.android.storageapp
 
 import com.hfad.android.storageapp.model.Human
 
-interface SwipeCallbacks{
+interface SwipeCallbacks {
     fun leftSwipe(human: Human)
-    fun rightSwipe()
+    fun rightSwipe(human: Human)
 }

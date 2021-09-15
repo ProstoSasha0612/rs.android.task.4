@@ -17,7 +17,6 @@ class HumanDatabaseCursor(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION), HumansDao {
 
 
-
     private val selectQuery = "SELECT * FROM ${HumanDbNameClass.TABLE_NAME}"
     private val selectQueryInAlphabetOrder =
         "SELECT * FROM ${HumanDbNameClass.TABLE_NAME} ORDER BY name"
@@ -37,7 +36,7 @@ class HumanDatabaseCursor(context: Context) :
         return withContext(Dispatchers.IO) {
             val db = readableDatabase
             val listOfHumans = mutableListOf<Human>()
-            val cursor = db.rawQuery(HumanDbNameClass.SQL_CREATE_TABLE,null)
+            val cursor = db.rawQuery(HumanDbNameClass.SQL_CREATE_TABLE, null)
             while (cursor.moveToNext()) {
                 val id = cursor.getInt(cursor.getColumnIndex(HumanDbNameClass.COLUMN_ID))
                 val name = cursor.getString(cursor.getColumnIndex(HumanDbNameClass.COLUMN_NAME))
@@ -101,11 +100,15 @@ class HumanDatabaseCursor(context: Context) :
 
     override fun add(human: Human) {
         addHuman(human)
-}
+    }
 
     override fun delete(human: Human) {
         val db = writableDatabase
-        db.delete(HumanDbNameClass.TABLE_NAME, HumanDbNameClass.COLUMN_ID + "=?", arrayOf(human.id.toString()))
+        db.delete(
+            HumanDbNameClass.TABLE_NAME,
+            HumanDbNameClass.COLUMN_ID + "=?",
+            arrayOf(human.id.toString())
+        )
         db.close()
     }
 
