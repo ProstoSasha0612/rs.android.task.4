@@ -46,6 +46,8 @@ class HumanListFragment : Fragment() {
             updateFullList(it)
         }
 
+
+
         //Checking settings from preferences
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         if (prefs.getBoolean(getString(R.string.alphabet_filter_settings_key), false)) {

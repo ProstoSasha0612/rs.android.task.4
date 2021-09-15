@@ -12,7 +12,7 @@ interface HumansDao{
     fun getAll(): LiveData<List<Human>>
 
     @Query("SELECT * FROM peoples WHERE id=(:id)")
-    fun get(id:Int): LiveData<Human>
+    fun get(id:Int): LiveData<Human?>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
