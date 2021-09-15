@@ -7,15 +7,21 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import com.hfad.android.storageapp.R
 import com.hfad.android.storageapp.databinding.FragmentUpdateHumanBinding
 import com.hfad.android.storageapp.model.Human
+import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 
 
 class UpdateHumanFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateHumanBinding
-    private var human:Human? = null
+    private var human: Human? = null
+    private val listViewModel: HumanListFragmentViewModel by lazy {
+        ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,20 +34,39 @@ class UpdateHumanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Add new person"
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true) //TODO add navigation
+        //TODO add navigation
 
         human = arguments?.get(HUMAN_KEY) as? Human
 
         binding.btnAdd.setOnClickListener {
-            parentFragmentManager.popBackStack()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.container, HumanListFragment())
-                .commit()
+            if(updateHuman()){
+                parentFragmentManager.popBackStack()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, HumanListFragment())
+                    .commit()
+            }
         }
     }
 
-    private fun updateHuman(human: Human) {
+    private fun updateHuman(): Boolean {
 
+        val name = binding.edittextName.text.toString()
+        val surname = binding.editTextSurname.text.toString()
+        val age = binding.editTextAge.text.toString()
+        val gender =
+            if (binding.rbMale.isChecked) AddHumanFragment.MALE_GENDER else AddHumanFragment.FEMALE_GENDER
+        val updatedHuman = Human(human?.id ?: 0, name, surname, age.toInt(), gender)
+
+        if (name.isNotEmpty() && surname.isNotEmpty() &&
+            age.isNotEmpty() && gender.isNotEmpty()
+        ) {
+            listViewModel.update(updatedHuman)
+            return true
+        } else {
+            Snackbar.make(binding.root, "Please, fill in all the fields", Snackbar.LENGTH_LONG)
+                .show()
+            return false
+        }
     }
 
     companion object {

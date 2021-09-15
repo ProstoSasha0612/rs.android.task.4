@@ -37,7 +37,7 @@ class HumanDatabaseCursor(context: Context) :
         return withContext(Dispatchers.IO) {
             val db = readableDatabase
             val listOfHumans = mutableListOf<Human>()
-            val cursor = db.rawQuery(selectQuery, null)
+            val cursor = db.rawQuery(HumanDbNameClass.SQL_CREATE_TABLE,null)
             while (cursor.moveToNext()) {
                 val id = cursor.getInt(cursor.getColumnIndex(HumanDbNameClass.COLUMN_ID))
                 val name = cursor.getString(cursor.getColumnIndex(HumanDbNameClass.COLUMN_NAME))
@@ -81,7 +81,6 @@ class HumanDatabaseCursor(context: Context) :
         val db = writableDatabase
         val valueToAdd = ContentValues().apply {
             with(human) {
-                put(HumanDbNameClass.COLUMN_ID, id)
                 put(HumanDbNameClass.COLUMN_NAME, name)
                 put(HumanDbNameClass.COLUMN_SURNAME, secondName)
                 put(HumanDbNameClass.COLUMN_AGE, age)
@@ -102,7 +101,7 @@ class HumanDatabaseCursor(context: Context) :
 
     override fun add(human: Human) {
         addHuman(human)
-    }
+}
 
     override fun delete(human: Human) {
         val db = writableDatabase

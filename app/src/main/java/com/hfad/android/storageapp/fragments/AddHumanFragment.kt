@@ -1,11 +1,11 @@
 package com.hfad.android.storageapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.hfad.android.storageapp.R
@@ -17,9 +17,6 @@ import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 class AddHumanFragment : Fragment() {
 
     private lateinit var binding: AddHumanFragmentBinding
-    private val viewModel: AddHumanViewModel by lazy {
-        ViewModelProviders.of(this).get(AddHumanViewModel::class.java)
-    }
     private val listViewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }
@@ -36,7 +33,7 @@ class AddHumanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Add new person"
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true) //TODO add navigation
+        //TODO add navigation
 
         binding.btnAdd.setOnClickListener {
             if (addToList()) {
@@ -48,7 +45,6 @@ class AddHumanFragment : Fragment() {
         }
     }
 
-    //TODO add when returns back    notify item inserted
     private fun addToList(): Boolean {
         val name = binding.edittextName.text.toString()
         val surname = binding.editTextSurname.text.toString()
@@ -58,7 +54,7 @@ class AddHumanFragment : Fragment() {
         if (name.isNotEmpty() && surname.isNotEmpty() &&
             age.isNotEmpty() && gender.isNotEmpty()
         ) {
-            listViewModel.add(Human(id, name, surname, age.toInt(), gender))
+            listViewModel.add(Human(0, name, surname, age.toInt(), gender))
             return true
         } else {
             Snackbar.make(binding.root, "Please, fill in all the fields", Snackbar.LENGTH_LONG)

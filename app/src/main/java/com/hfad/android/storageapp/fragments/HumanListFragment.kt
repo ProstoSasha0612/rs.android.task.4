@@ -39,13 +39,11 @@ class HumanListFragment : Fragment() {
             adapter = humanAdapter
         }
         (activity as? AppCompatActivity)?.supportActionBar?.title = "StorageApp"
-
-
+        //TODO add navigation
 
         viewModel.humansLiveData.observe(viewLifecycleOwner) {
             updateFullList(it)
         }
-
 
 
         //Checking settings from preferences
@@ -71,9 +69,7 @@ class HumanListFragment : Fragment() {
 
     private fun updateFullList(peoples: List<Human>) { //TODO add fun's that not submit All list, only one item(ec. when adding new Human)
         humanAdapter.submitList(peoples)
-
     }
-
 
 
 //    private fun updateOneItem(human: Human){ //TODO make it later
