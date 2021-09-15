@@ -11,18 +11,21 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.android.storageapp.HumanAdapter
 import com.hfad.android.storageapp.R
+import com.hfad.android.storageapp.SwipableItemTouchHelper
+import com.hfad.android.storageapp.SwipeCallbacks
 import com.hfad.android.storageapp.databinding.FragmentHumanListBinding
 import com.hfad.android.storageapp.model.Human
 import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 
 
-class HumanListFragment : Fragment() {
+class HumanListFragment : Fragment(), SwipeCallbacks {
 
     private lateinit var binding: FragmentHumanListBinding
     private val humanAdapter = HumanAdapter()
     private val viewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }
+    private val itemTouchHelper: SwipableItemTouchHelper = SwipableItemTouchHelper(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +64,22 @@ class HumanListFragment : Fragment() {
                 .commit()
         }
 
-        viewModel.itemTouchHelper.attachToRecyclerView(binding.humanList)
+
+        itemTouchHelper.touchHelper.attachToRecyclerView(binding.humanList)
 
 
+    }
+
+    //Swipable Callbacks
+    override fun leftSwipe(human: Human) {
+        viewModel.delete(human)
+    }
+
+    override fun rightSwipe() {
+        parentFragmentManager.beginTransaction()
+            .addToBackStack("Add Human Fragment")
+            .replace(R.id.container, UpdateHumanFragment())
+            .commit()
     }
 
 

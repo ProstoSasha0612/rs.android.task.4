@@ -33,17 +33,20 @@ class UpdateHumanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Add new person"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Update person"
         //TODO add navigation
 
         human = arguments?.get(HUMAN_KEY) as? Human
 
         binding.btnAdd.setOnClickListener {
-            if(updateHuman()){
+            if (updateHuman()) {
                 parentFragmentManager.popBackStack()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, HumanListFragment())
                     .commit()
+            } else{
+                Snackbar.make(binding.root, "Please, fill in all the fields", Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
     }
@@ -55,11 +58,11 @@ class UpdateHumanFragment : Fragment() {
         val age = binding.editTextAge.text.toString()
         val gender =
             if (binding.rbMale.isChecked) AddHumanFragment.MALE_GENDER else AddHumanFragment.FEMALE_GENDER
-        val updatedHuman = Human(human?.id ?: 0, name, surname, age.toInt(), gender)
 
         if (name.isNotEmpty() && surname.isNotEmpty() &&
             age.isNotEmpty() && gender.isNotEmpty()
         ) {
+            val updatedHuman = Human(human?.id ?: 0, name, surname, age.toInt(), gender)
             listViewModel.update(updatedHuman)
             return true
         } else {

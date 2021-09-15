@@ -18,19 +18,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HumanListFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: Repository = Repository.get()
-    private val swipeBackgroundDelete: ColorDrawable =
-        ColorDrawable(Color.parseColor("#FF0000")) //red
-    private val swipeBackgroundUpdate: ColorDrawable =
-        ColorDrawable(Color.parseColor("#FFA500")) //orange
-    private val deleteIcon: Drawable =
-        ContextCompat.getDrawable(
-            application.applicationContext,
-            R.drawable.ic_delete
-        )!! //TODO delete !!
-    private val editIcon: Drawable =
-        ContextCompat.getDrawable(application.applicationContext, R.drawable.ic_edit)!!
 
+
+
+    private val repository: Repository = Repository.get()
 
     val humansLiveData = repository.getAll()
 
