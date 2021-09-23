@@ -21,7 +21,8 @@ import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 class HumanListFragment : Fragment(), SwipeCallbacks {
 
     private var _binding: FragmentHumanListBinding? = null
-    private val binding = requireNotNull(_binding)
+    private val binding
+        get() = requireNotNull(_binding)
     private val humanAdapter = HumanAdapter()
     private val viewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)

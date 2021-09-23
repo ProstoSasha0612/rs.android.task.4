@@ -16,7 +16,8 @@ import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 class AddHumanFragment : Fragment() {
 
     private var _binding: AddHumanFragmentBinding? = null
-    private val binding = requireNotNull(_binding)
+    private val binding
+        get() = requireNotNull(_binding)
     private val listViewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }

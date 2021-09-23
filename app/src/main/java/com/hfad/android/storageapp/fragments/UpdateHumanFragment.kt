@@ -17,7 +17,8 @@ import com.hfad.android.storageapp.viewmodel.HumanListFragmentViewModel
 class UpdateHumanFragment : Fragment() {
 
     private var _binding: FragmentUpdateHumanBinding? = null
-    private val binding = requireNotNull(_binding)
+    private val binding
+        get() = requireNotNull(_binding)
     private var id: Int? = null
 
     private val listViewModel: HumanListFragmentViewModel by lazy {
