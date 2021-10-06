@@ -30,9 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, HumanListFragment())
-                .commit()
+            openHumanListFragment()
         }
     }
 
@@ -43,13 +41,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.toolbar_btn_settings) {
-            supportFragmentManager.popBackStack()
-            supportFragmentManager.beginTransaction()
-                .addToBackStack("Settings fragment")
-                .replace(R.id.container, SettingsFragment())
-                .commit()
+            openSettingsFragment("Settings fragment")
         }
         return true
+    }
+
+    private fun openSettingsFragment(tag: String? = null) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(tag)
+            .replace(R.id.container, SettingsFragment())
+            .commit()
+    }
+
+    private fun openHumanListFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, HumanListFragment())
+            .commit()
     }
 
 }

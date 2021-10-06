@@ -19,8 +19,8 @@ class HumanListFragmentViewModel(application: Application) : AndroidViewModel(ap
         repository.add(human)
     }
 
-    fun delete(human: Human) = viewModelScope.launch(Dispatchers.IO) {
-        repository.delete(human)
+    fun delete(human: Human?) = viewModelScope.launch(Dispatchers.IO) {
+        human?.let { repository.delete(human) }
     }
 
     fun getById(id: Int) = viewModelScope.launch(Dispatchers.IO) {

@@ -35,18 +35,18 @@ class HumanAdapter :
             binding.root.setOnLongClickListener(this)
         }
 
-        lateinit var human: Human
+        var human: Human? = null
 
         fun bind(human: Human) {
             this.human = human
-            binding.age.text = "Age: ${human.age}"
-            binding.name.text = "Name: ${human.name}"
-            binding.secondName.text = "Surname: ${human.secondName}"
-            binding.gender.text = "Gender: ${human.gender}"
+            binding.ageValue.text = human.age.toString()
+            binding.nameValue.text = human.name
+            binding.secondNameValue.text = human.secondName
+            binding.genderValue.text = human.gender
         }
 
         override fun onLongClick(v: View?): Boolean {
-            Snackbar.make(v ?: binding.root, "Hello", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(v ?: binding.root, R.string.hello_text, Snackbar.LENGTH_SHORT).show()
             return true
         }
     }
@@ -58,9 +58,7 @@ class HumanAdapter :
             }
 
             override fun areContentsTheSame(oldItem: Human, newItem: Human): Boolean {
-                return oldItem.age == newItem.age && oldItem.name == newItem.name &&
-                        oldItem.secondName == newItem.secondName &&
-                        oldItem.gender == newItem.gender
+                return oldItem == newItem
             }
         }
     }

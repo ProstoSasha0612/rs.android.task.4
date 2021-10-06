@@ -7,31 +7,68 @@
 
     <TextView
         android:id="@+id/name"
+        style="@style/human_item_textview"
         android:text="@string/default_name"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name_value"
+        style="@style/human_item_textview"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/human_item_textview" />
+        tools:text="Misha" />
+
+    <TextView
+        android:id="@+id/second_name_value"
+        style="@style/human_item_textview"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/secondName"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="Miskin" />
 
     <TextView
         android:id="@+id/secondName"
+        style="@style/human_item_textview"
         android:text="@string/default_surname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name"
-        style="@style/human_item_textview"/>
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <TextView
         android:id="@+id/age"
+        style="@style/human_item_textview"
         android:text="@string/default_age"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/secondName"
-        style="@style/human_item_textview"/>
+        app:layout_constraintTop_toBottomOf="@id/secondName" />
+
+    <TextView
+        android:id="@+id/age_value"
+        style="@style/human_item_textview"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toBottomOf="@+id/second_name_value"
+        tools:text="20" />
+
 
     <TextView
         android:id="@+id/gender"
+        style="@style/human_item_textview"
         android:text="@string/default_gender"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/age" />
+
+
+    <TextView
+        android:id="@+id/gender_value"
+        style="@style/human_item_textview"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/gender"
         app:layout_constraintTop_toBottomOf="@id/age"
-        style="@style/human_item_textview"/>
+        tools:text="Male" />
 
     <View
         android:id="@+id/view"

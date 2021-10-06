@@ -19,7 +19,7 @@ class HumanDatabaseCursor(context: Context) :
 
     private val selectQuery = "SELECT * FROM ${HumanDbNameClass.TABLE_NAME}"
     private val selectQueryInAlphabetOrder =
-        "SELECT * FROM ${HumanDbNameClass.TABLE_NAME} ORDER BY name"
+        "SELECT * FROM ${HumanDbNameClass.TABLE_NAME} ORDER BY ${HumanDbNameClass.COLUMN_NAME}"
 
     override fun onCreate(db: SQLiteDatabase?) {
         try {
@@ -56,7 +56,7 @@ class HumanDatabaseCursor(context: Context) :
         return withContext(Dispatchers.IO) {
             var human: Human? = null
             val db = readableDatabase
-            val getByIdQuery = "SELECT * FROM peoples WHERE id = $id"
+            val getByIdQuery = "SELECT * FROM peoples WHERE ${HumanDbNameClass.COLUMN_ID} = $id"
             val cursor = db.rawQuery(getByIdQuery, null)
             while (cursor.moveToNext()) {
                 if (cursor.getInt(cursor.getColumnIndex(HumanDbNameClass.COLUMN_ID)) == id) {

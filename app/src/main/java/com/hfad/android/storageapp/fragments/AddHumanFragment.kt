@@ -42,6 +42,7 @@ class AddHumanFragment : Fragment() {
                     .replace(R.id.container, HumanListFragment())
                     .commit()
             }
+
         }
     }
 
@@ -57,7 +58,11 @@ class AddHumanFragment : Fragment() {
             listViewModel.add(Human(0, name, surname, age.toInt(), gender))
             return true
         } else {
-            Snackbar.make(binding.root, "Please, fill in all the fields", Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                binding.root,
+                getString(R.string.fill_in_all_the_fields_text),
+                Snackbar.LENGTH_LONG
+            )
                 .show()
             return false
         }
@@ -68,9 +73,12 @@ class AddHumanFragment : Fragment() {
         _binding = null
     }
 
+    //Yes, i know that better add genders to enum or sealed class, but i need much logic changes,
+    //and it won't bring new functionality, therefore i remember this for all my new projects
     companion object {
         const val MALE_GENDER = "Male"
         const val FEMALE_GENDER = "Female"
     }
+
 
 }

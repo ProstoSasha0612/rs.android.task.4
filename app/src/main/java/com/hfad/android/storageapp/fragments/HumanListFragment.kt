@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
@@ -27,7 +28,6 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
     private val viewModel: HumanListFragmentViewModel by lazy {
         ViewModelProviders.of(this).get(HumanListFragmentViewModel::class.java)
     }
-    private val itemTouchHelper: SwipableItemTouchHelper = SwipableItemTouchHelper(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +45,12 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
         }
         (activity as? AppCompatActivity)?.supportActionBar?.title = "StorageApp"
         //TODO add navigation
+        val itemTouchHelper: SwipableItemTouchHelper =
+            SwipableItemTouchHelper(
+                this,
+                ContextCompat.getColor(requireContext(), R.color.red),
+                ContextCompat.getColor(requireContext(), R.color.orange)
+            )
 
         viewModel.humansLiveData.observe(viewLifecycleOwner) {
             updateFullList(it)
@@ -74,21 +80,21 @@ class HumanListFragment : Fragment(), SwipeCallbacks {
     }
 
     //Swipable Callbacks
-    override fun leftSwipe(human: Human) {
+    override fun leftSwipe(human: Human?) {
         viewModel.delete(human)
     }
 
-    override fun rightSwipe(human: Human) {
+    override fun rightSwipe(human: Human?) {
         parentFragmentManager.beginTransaction()
             .addToBackStack("Add Human Fragment")
             .replace(
                 R.id.container,
                 UpdateHumanFragment.newInstance(
-                    human.id,
-                    human.name,
-                    human.secondName,
-                    human.age,
-                    human.gender
+                    human?.id ?: -1,
+                    human?.name ?: "Error",
+                    human?.secondName ?: "Error",
+                    human?.age ?: -1,
+                    human?.gender ?: "Error"
                 )
             )
             .commit()

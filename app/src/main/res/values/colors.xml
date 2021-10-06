@@ -13,5 +13,8 @@
     <color name="colorPrimaryDark">#ba6b6c</color>
     <color name="colorAccent">#ffcccb</color>
     <color name="statusBarColor">#CA6A6A</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#FFA500</color>
+
 
 </resources>

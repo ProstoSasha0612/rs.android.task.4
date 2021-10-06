@@ -1,16 +1,20 @@
 package com.hfad.android.storageapp
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class SwipableItemTouchHelper(val swipeCallbacks: SwipeCallbacks) {
+class SwipableItemTouchHelper(
+    val swipeCallbacks: SwipeCallbacks,
+    @ColorInt val deleteColor: Int,
+    @ColorInt val updateColor: Int
+) {
     private val swipeBackgroundDelete: ColorDrawable =
-        ColorDrawable(Color.parseColor("#FF0000")) //red
+        ColorDrawable(deleteColor) //red
     private val swipeBackgroundUpdate: ColorDrawable =
-        ColorDrawable(Color.parseColor("#FFA500")) //orange
+        ColorDrawable(updateColor) //orange
 
     //TODO: Add icons to swaps ( i know, it is hard but i might make it)
     val touchHelper =
